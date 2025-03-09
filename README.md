@@ -7,8 +7,7 @@ Un script FiveM qui ajoute un système de sac à dos avec persistance des donné
 - Système de sac à dos intégré avec ox_inventory
 - Affichage des armes sur le dos des joueurs
 - Animation personnalisable à l'ouverture du sac
-- Persistance des données (le contenu du sac est sauvegardé)
-- Système de sauvegarde automatique
+- Persistance automatique des données
 - Compatibilité complète avec ox_inventory
 - Message /me et animation à l'ouverture du sac
 - Protection contre l'utilisation en voiture (configurable)
@@ -33,14 +32,12 @@ Le fichier `config.lua` permet de personnaliser :
 - Poids maximum
 - Types d'items autorisés
 - Animation d'ouverture
-- Intervalle de sauvegarde
 - Et plus encore...
 
 ```lua
 Config.Backpack = {
     size = 15,              -- Nombre de slots
     maxWeight = 50000,      -- Poids maximum
-    saveInterval = 300000,  -- Intervalle de sauvegarde (5 minutes)
     
     -- Animation personnalisable
     animation = {
@@ -74,10 +71,10 @@ A mettre dans ox_inventory/data/items.lua :
 
 ## 🔄 Persistance des données
 
-Le contenu du sac à dos est automatiquement sauvegardé :
-- Toutes les 5 minutes (configurable)
-- À la déconnexion du joueur
-- Conservé après redémarrage du serveur
+Le contenu du sac à dos est automatiquement sauvegardé grâce au système de persistance intégré d'ox_inventory :
+- Sauvegarde automatique du contenu
+- Conservation après redémarrage du serveur
+- Aucune configuration supplémentaire nécessaire
 
 ## 🎮 Utilisation
 
