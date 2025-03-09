@@ -1,46 +1,94 @@
-# 🎮 WeaponsBack - FiveM Resource
+# 🎒 WeaponsBack avec système de sac à dos
 
-![WeaponsBack Preview](https://cdn.discordapp.com/attachments/1312915163569062030/1348134441800831059/image.png?ex=67ce5b8a&is=67cd0a0a&hm=35776432a587ad77a4f06b318cf5ff1afabba7bcc9967c62380bffa14af31fa1&)
+Un script FiveM qui ajoute un système de sac à dos avec persistance des données et affichage des armes sur le dos.
 
-## 📝 Description
-WeaponsBack est un script FiveM qui permet d'afficher les armes dans le dos de votre personnage de manière réaliste. Compatible avec ox_inventory, ce script ajoute une dimension visuelle immersive à votre serveur GTA V RP.
+## ✨ Fonctionnalités
 
-## ✨ Caractéristiques
-- Affichage réaliste des armes dans le dos
-- Compatible avec ox_inventory
-- Support pour de nombreuses armes :
-  - Armes de mêlée (Batte de baseball, Jerrican)
-  - Fusils d'assaut (Carbine Rifle, Assault Rifle, etc.)
-  - Mitraillettes (Micro SMG, SMG, etc.)
-  - Fusils de sniper
-  - Fusils à pompe
-- Configuration facile des positions des armes
-- Mise à jour en temps réel de l'affichage
+- Système de sac à dos intégré avec ox_inventory
+- Affichage des armes sur le dos des joueurs
+- Animation personnalisable à l'ouverture du sac
+- Persistance des données (le contenu du sac est sauvegardé)
+- Système de sauvegarde automatique
+- Compatibilité complète avec ox_inventory
+- Message /me et animation à l'ouverture du sac
+- Protection contre l'utilisation en voiture (configurable)
 
 ## 📋 Prérequis
-- FiveM Server
-- ox_inventory
 
-## 🚀 Installation
-1. Téléchargez le dossier `weaponsback`
-2. Placez-le dans votre dossier `resources`
-3. Ajoutez `ensure weaponsback` à votre `server.cfg`
+- ox_inventory
+- ox_lib
+
+## 🛠️ Installation
+
+1. Téléchargez et extrayez le script dans votre dossier resources
+2. Ajoutez `ensure weaponsback` dans votre server.cfg
+3. Configurez l'item dans ox_inventory
+4. Redémarrez votre serveur
 
 ## ⚙️ Configuration
-Le fichier de configuration se trouve dans `Client/cl_weaponsback.lua`. Vous pouvez ajuster :
-- La position des armes (x, y, z)
-- La rotation des armes (x_rotation, y_rotation, z_rotation)
-- L'os d'attachement (back_bone)
-- Les armes compatibles et leurs modèles
 
-## 🛠️ Support Technique
-En cas de problème ou pour des suggestions d'amélioration, n'hésitez pas à ouvrir une issue sur GitHub.
+Le fichier `config.lua` permet de personnaliser :
 
-## 👨‍💻 Auteur
-MaitreAntho
+- Taille du sac à dos (slots)
+- Poids maximum
+- Types d'items autorisés
+- Animation d'ouverture
+- Intervalle de sauvegarde
+- Et plus encore...
 
-## 📜 License
+```lua
+Config.Backpack = {
+    size = 15,              -- Nombre de slots
+    maxWeight = 50000,      -- Poids maximum
+    saveInterval = 300000,  -- Intervalle de sauvegarde (5 minutes)
+    
+    -- Animation personnalisable
+    animation = {
+        enabled = true,
+        duration = 1500,
+        dict = 'clothingshirt',
+        clip = 'try_shirt_positive_d',
+        canCancel = true,
+        disableInCar = true
+    }
+}
+```
+
+## 📦 Configuration de l'item
+
+A mettre dans ox_inventory/data/items.lua :
+
+```lua
+['backpack'] = {
+    label = 'Sac à dos',
+    weight = 1000,
+    stack = false,
+    close = true,
+    description = "Un sac à dos pour transporter plus d'objets",
+    consume = 0,
+    client = {
+        event = 'weaponsback:useBackpack'
+    }
+}
+```
+
+## 🔄 Persistance des données
+
+Le contenu du sac à dos est automatiquement sauvegardé :
+- Toutes les 5 minutes (configurable)
+- À la déconnexion du joueur
+- Conservé après redémarrage du serveur
+
+## 🎮 Utilisation
+
+- Utilisez le sac à dos depuis votre inventaire
+- Une animation et un message /me s'afficheront
+- Le contenu est sauvegardé automatiquement
+- Impossible d'utiliser en voiture (configurable)
+
+## 📄 Licence
+
 Ce projet est sous licence libre d'utilisation pour vos serveurs FiveM.
 
 ## ⚠️ Avertissement
-*Note : Ce script nécessite ox_inventory pour fonctionner correctement.*
+*Note : Ce script nécessite ox_inventory et ox_lib pour fonctionner correctement.*
