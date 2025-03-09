@@ -30,6 +30,5 @@ Config.Backpack = {
     },
     
     -- Configuration de la sauvegarde
-    saveInterval = 300000, -- Intervalle de sauvegarde automatique en ms (300000 = 5 minutes)
     persistentStorage = true -- Activer la persistance du stockage
 }
